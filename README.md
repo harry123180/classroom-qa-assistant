@@ -18,6 +18,17 @@
 
 ## 二、部署到 Vercel
 
+### 方法 A：請 AI 幫你部署（不需要 GitHub，推薦）
+
+1. 到 [vercel.com/signup](https://vercel.com/signup) 用 Email 註冊 Vercel 帳號
+2. 下載這個專案：在 GitHub 頁面點 **Code → Download ZIP** 解壓縮，或執行
+   `git clone https://github.com/harry123180/classroom-qa-assistant.git`
+3. 用 Codex / Claude Code 開啟這個資料夾，跟它說：**「幫我部署到 Vercel」**
+4. 它會開瀏覽器讓你登入 Vercel，並問你 API Key、老師密碼等設定，照著回答即可
+5. 中間它會請你到 Vercel 網站點幾下加資料庫（Neon），大約一分鐘
+
+### 方法 B：透過 GitHub 自動部署
+
 1. 把這個資料夾推到你的 GitHub（私有 repo 也可以）
 2. 到 [vercel.com](https://vercel.com) → **Add New → Project** → 選擇這個 repo → **Deploy**
 3. 到專案的 **Settings → Environment Variables**，加入：

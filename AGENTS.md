@@ -55,6 +55,29 @@ npm run dev               # 終端機 2：前端（http://localhost:5173）
 
 老師後台在 `http://localhost:5173/#/teacher`。
 
+## 部署到 Vercel（老師說「幫我部署 / 上線」時照這個做）
+
+老師通常**沒有 GitHub 帳號**，請用 Vercel CLI 直接從本機部署，不要要求老師建 GitHub repo。
+
+1. 確認老師已有 Vercel 帳號（沒有的話請他到 https://vercel.com/signup 用 Email 註冊）
+2. `npx vercel login` → 會開瀏覽器，**請老師自己完成登入**，不要代填
+3. `npx vercel --yes` → 第一次部署，會自動建立 Vercel 專案（之後就有 `.vercel/` 資料夾）
+4. 設定環境變數（值向老師詢問；**不要把金鑰寫進任何檔案或 commit**）：
+   ```bash
+   printf '%s' "<值>" | npx vercel env add LLM_API_KEY production
+   printf '%s' "<值>" | npx vercel env add LLM_MODEL production
+   printf '%s' "<值>" | npx vercel env add TEACHER_PASSWORD production
+   # 選填：LLM_BASE_URL（用 OpenAI 官方就不用設）、CLASS_CODE
+   ```
+5. 資料庫：請老師到 Vercel 網站 → 這個專案 → **Storage** → **Create Database** → **Neon** → 連到此專案。
+   完成後 `DATABASE_URL` 會自動設定。**沒做這步，問答紀錄會消失。**
+6. `npx vercel --prod` → 正式部署，輸出的網址就是學生要用的網址
+7. 打開 `<網址>/api/health` 確認 `llmConfigured: true` 且 `database: "postgres"`
+8. 告訴老師：學生網址是 `<網址>/`，老師後台是 `<網址>/#/teacher`
+
+之後修改內容，只要再跑一次 `npx vercel --prod`。
+環境變數改了之後也要再跑一次 `npx vercel --prod` 才會生效。
+
 ## 必須遵守的規則
 
 1. **金鑰只能在後端**。不要把 `LLM_API_KEY`、`TEACHER_PASSWORD` 放進 `src/` 或任何前端程式碼，也不要用 `VITE_` 開頭的環境變數存機密（會被打包進前端）。
