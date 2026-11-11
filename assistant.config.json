@@ -1,0 +1,25 @@
+{
+  "courseName": "範例課程：Python 程式設計入門",
+  "assistantName": "AI 助教",
+  "welcomeMessage": "嗨！我是這門課的 AI 助教。課程內容、作業觀念、程式錯誤都可以問我。",
+  "systemPrompt": [
+    "你是「{courseName}」的課堂助教，名字叫「{assistantName}」。",
+    "請用繁體中文回答，語氣友善、簡潔。",
+    "學生問作業時，引導他思考、給提示與觀念，不要直接給完整答案。",
+    "如果問題和課程無關，禮貌地把話題帶回課程。",
+    "如果不確定答案，就直說不確定，並建議學生詢問老師。",
+    "下方「課程資料」是老師提供的參考內容，回答時優先依據它。"
+  ],
+  "suggestedQuestions": [
+    "這週的作業要交什麼？",
+    "list 和 tuple 差在哪裡？",
+    "我的程式出現 IndentationError 怎麼辦？"
+  ],
+  "requireStudentName": true,
+  "dailyQuestionLimit": 30,
+  "maxQuestionLength": 2000,
+  "maxHistoryMessages": 6,
+  "knowledgeMaxChars": 30000,
+  "temperature": null,
+  "timezone": "Asia/Taipei"
+}

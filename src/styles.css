@@ -1,0 +1,152 @@
+/* 想換配色，改這裡的變數就好 */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #1f2328;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #2563eb;
+  --primary-text: #ffffff;
+  --user-bubble: #2563eb;
+  --user-text: #ffffff;
+  --code-bg: #f3f4f6;
+  --error: #dc2626;
+  --warning-bg: #fef3c7;
+  --warning-text: #92400e;
+  --radius: 12px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --surface: #181b21;
+    --text: #e6e8eb;
+    --muted: #9aa3ae;
+    --border: #2a2f37;
+    --primary: #3b82f6;
+    --user-bubble: #2563eb;
+    --code-bg: #22262e;
+    --error: #f87171;
+    --warning-bg: #3b2f12;
+    --warning-text: #fcd34d;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  line-height: 1.6;
+}
+
+button, input, textarea { font: inherit; color: inherit; }
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+button:disabled { opacity: 0.5; cursor: default; }
+button.primary { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+
+input, textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.link-button {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page { max-width: 860px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-title { font-weight: 700; font-size: 1.1rem; }
+.topbar-sub { color: var(--muted); font-size: 0.85rem; }
+.topbar-actions { display: flex; gap: 16px; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+
+.join-form { margin: 48px 16px; display: flex; flex-direction: column; gap: 14px; max-width: 420px; align-self: center; width: calc(100% - 32px); }
+.join-form h2 { margin: 0; }
+.join-form label { display: flex; flex-direction: column; gap: 6px; }
+
+/* ---- 學生聊天 ---- */
+.messages { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.bubble { max-width: 85%; padding: 10px 14px; border-radius: var(--radius); white-space: pre-wrap; word-break: break-word; }
+.bubble.user { align-self: flex-end; background: var(--user-bubble); color: var(--user-text); }
+.bubble.assistant { align-self: flex-start; background: var(--surface); border: 1px solid var(--border); white-space: normal; }
+.thinking { color: var(--muted); }
+
+.suggestions { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border-radius: 999px; padding: 6px 12px; font-size: 0.9rem; }
+
+.composer {
+  position: sticky;
+  bottom: 0;
+  padding: 12px 16px 16px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.composer-row { display: flex; gap: 8px; align-items: stretch; }
+.composer textarea { resize: none; }
+
+.error { color: var(--error); font-size: 0.9rem; }
+.warning { background: var(--warning-bg); color: var(--warning-text); padding: 12px 16px; border-radius: var(--radius); }
+.muted { color: var(--muted); font-size: 0.9rem; }
+.center-message { padding: 64px 16px; text-align: center; color: var(--muted); }
+
+/* ---- Markdown ---- */
+.markdown > :first-child { margin-top: 0; }
+.markdown > :last-child { margin-bottom: 0; }
+.markdown pre { background: var(--code-bg); padding: 12px; border-radius: 8px; overflow-x: auto; }
+.markdown code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+.markdown pre code { padding: 0; background: none; }
+.markdown table { border-collapse: collapse; display: block; overflow-x: auto; }
+.markdown th, .markdown td { border: 1px solid var(--border); padding: 4px 8px; }
+
+/* ---- 老師後台 ---- */
+.dashboard { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+.dashboard h3 { margin: 0 0 10px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat-value { font-size: 1.8rem; font-weight: 700; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.toolbar input { flex: 1; min-width: 180px; }
+.question-list { display: flex; flex-direction: column; gap: 8px; }
+.question-item summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.question-item[open] summary { margin-bottom: 12px; }
+.question-text { flex-basis: 100%; white-space: pre-wrap; }
+.badge { background: var(--error); color: #fff; border-radius: 6px; padding: 0 6px; font-size: 0.8rem; }
+
+@media (max-width: 560px) {
+  .stats { grid-template-columns: 1fr; }
+  .bubble { max-width: 100%; }
+}
